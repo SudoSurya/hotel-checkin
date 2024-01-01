@@ -2,6 +2,7 @@ package server
 
 import (
 	"hotel-checkin/cmd/web"
+	"hotel-checkin/internal/server/handlers"
 	"net/http"
 
 	"github.com/a-h/templ"
@@ -16,6 +17,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 	fileServer := http.FileServer(http.FS(web.Files))
 	r.Handle("/js/*", fileServer)
 	r.Get("/", templ.Handler(web.Homepage()).ServeHTTP)
-    r.Get("/login", templ.Handler(web.LoginForm()).ServeHTTP)
+	r.Get("/hotel/register", templ.Handler(web.HotelRegisterForm()).ServeHTTP)
+	r.Post("/hotel/register/create", handlers.CreateHotelForm)
 	return r
 }

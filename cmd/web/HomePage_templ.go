@@ -29,7 +29,7 @@ func Homepage() templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<main class=\"flex flex-col items-center justify-center space-y-4 bg-[#ffffff]\"><section class=\"container grid gap-12 px-4 md:px-6 py-10\"><div class=\"flex flex-col items-center justify-center space-y-4 text-center\"><h1 class=\"text-5xl font-bold tracking-tighter sm:text-7xl\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<main class=\"flex flex-col items-center justify-center space-y-4 bg-[#ffffff]\"><section class=\"container grid gap-12 px-4 md:px-6 py-10\"><div class=\"flex flex-col items-center justify-center space-y-4 text-center\"><h1 class=\"text-3xl font-bold tracking-tighter sm:text-6xl\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -74,7 +74,7 @@ func Homepage() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p><button class=\"bg-black text-white inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 mt-4\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p><a hx-boost=\"true\" href=\"/hotel/register\" class=\"bg-black text-white inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 mt-4\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -83,7 +83,7 @@ func Homepage() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</button></div></div><div class=\"rounded-lg border bg-card text-card-foreground shadow-sm\" data-v0-t=\"card\"><div class=\"flex flex-col space-y-1.5 p-6\"><h3 class=\"text-2xl font-semibold\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a></div></div><div class=\"rounded-lg border bg-card text-card-foreground shadow-sm\" data-v0-t=\"card\"><div class=\"flex flex-col space-y-1.5 p-6\"><h3 class=\"text-2xl font-semibold\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
