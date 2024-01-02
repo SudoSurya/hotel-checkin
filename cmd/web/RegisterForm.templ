@@ -2,133 +2,62 @@ package web
 
 templ HotelRegisterForm() {
 	@Base() {
-		<form hx-post="/hotel/register/create" METHOD="post" class="mx-auto max-w-2xl p-4 space-y-8">
-			<h1 class="text-4xl font-bold text-center">Hotel Registration</h1>
-			<div
-				class="rounded-lg border bg-card text-card-foreground shadow-sm"
-				data-v0-t="card"
-			>
-				<div class="flex flex-col space-y-1.5 p-6">
-					<h2 class="text-2xl font-semibold">Hotel Information</h2>
-				</div>
-				<div class="p-6 space-y-4">
-					<div class="space-y-2">
-						<label
-							class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-							for="hotel-name"
-						>Hotel Name</label><input
-	class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-	id="hotel_name"
-	name="hotel_name"
-	placeholder="Hotel Paradise"
-	required=""
-/>
-					</div>
-					<div class="grid grid-cols-3 gap-4">
-						<div class="space-y-2">
-							<label
-								class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-								for="city"
-							>City</label><input
-	class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-	id="city"
-	name="city"
-	placeholder="San Francisco"
-	required=""
-/>
-						</div>
-						<div class="space-y-2">
-							<label
-								class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-								for="state"
-							>State</label><input
-	class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-	id="state"
-	name="state"
-	placeholder="California"
-	required=""
-/>
-						</div>
-						<div class="space-y-2">
-							<label
-								class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-								for="country"
-							>Country</label><input
-	class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-	id="country"
-	name="country"
-	placeholder="United States"
-	required=""
-/>
-						</div>
-					</div>
-						<div class="space-y-2">
-							<label
-								class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-								for="zip"
-							>Country</label><input
-	class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-	id="zip"
-	name="zip"
-	placeholder="534290"
-	required=""
-/>
-						</div>
-					</div>
-					<div class="space-y-2">
-						<label
-							class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-							for="landline"
-						>Landline Number</label><input
-	class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-	id="landline"
-	name="landline"
-	placeholder="+1 (123) 456-7890"
-	required=""
-/>
-					</div>
-				</div>
-			<div
-				class="rounded-lg border bg-card text-card-foreground shadow-sm"
-				data-v0-t="card"
-			>
-				<div class="flex flex-col space-y-1.5 p-6">
-					<h2 class="text-2xl font-semibold">Owner Information</h2>
-				</div>
-				<div class="p-6 space-y-4">
-					<div class="space-y-2">
-						<label
-							class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-							for="owner-name"
-						>Owner's Name</label><input
-	class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-	id="owner_name"
-	name="owner_name"
-	placeholder="John Doe"
-	required=""
-/>
-					</div>
-					<div class="space-y-2">
-						<label
-							class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-							for="email"
-						>Email Address</label><input
-	class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-	id="owner_email"
-	name="owner_email"
-	placeholder="john@example.com"
-	required=""
-	type="email"
-/>
-					</div>
-				</div>
+		<script type="text/javascript" src="/js/locationapi.js">
+        </script>
+		<form id="hotelrefform" hx-post="/hotel/register/create" METHOD="post" hx-swap="#hotelReg" class="mx-auto max-w-2xl p-4 space-y-8 mt-10">
+			<h1 class="text-xl text-slate-600">Hotel Registration Form</h1>
+			<label for="hotel_name" class="block text-sm font-medium text-gray-700">Hotel Name</label>
+			<input required type="text" name="hotel_name" placeholder="hotel name" class="w-full p-2 border border-gray-300 rounded-md"/>
+			<div class="flex justify-between w-full">
+				<label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+				<label for="state" class="block text-sm font-medium text-gray-700">State</label>
+				<label for="city" class="block text-sm font-medium text-gray-700">City</label>
 			</div>
-			<button
-				class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full"
-				type="submit"
-			>
-				Register
-			</button>
+			<div class="flex space-x-2">
+				<select required name="country" id="country" class="w-full p-2 border border-gray-300 rounded-md" onchange="updateStates()">
+					<!-- Options will be dynamically populated using JavaScript -->
+				</select>
+				<select required name="state" id="state" class="w-full p-2 border border-gray-300 rounded-md" onchange="updateCities()">
+					<!-- Options will be dynamically populated using JavaScript -->
+				</select>
+				<select required name="city" id="city" class="w-full p-2 border border-gray-300 rounded-md">
+					<!-- Options will be dynamically populated using JavaScript -->
+				</select>
+			</div>
+			<div class="flex justify-between w-full">
+				<label for="zip" class="block text-sm font-medium text-gray-700">Zip Code</label>
+				<label for="landline" class="block text-sm font-medium text-gray-700">Hotel Landline</label>
+			</div>
+			<div class="flex space-x-2">
+				<input required type="text" name="zip" placeholder="Hotel Landline" class="w-full p-2 border border-gray-300 rounded-md" oninput="javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6); this.value = this.value.replace(/[^0-9]/g, '');"/>
+				<input required type="text" name="landline" placeholder="Hotel Landline" class="w-full p-2 border border-gray-300 rounded-md" oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10); this.value = this.value.replace(/[^0-9]/g, '');"/>
+			</div>
+			<label for="owner_name" class="block text-sm font-medium text-gray-700">Owner Name</label>
+			<input required type="text" name="owner_name" placeholder="Owner Name" class="w-full p-2 border border-gray-300 rounded-md"/>
+			<div class="flex justify-between w-full">
+				<label for="owner_email" class="block text-sm font-medium text-gray-700">Owner Email</label>
+				<label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+			</div>
+			<div class="flex space-x-2">
+				<input required type="email" name="owner_email" placeholder="Owner Email" class="w-full p-2 border border-gray-300 rounded-md"/>
+				<input required type="text" name="password" placeholder="Password" class="w-full p-2 border border-gray-300 rounded-md" minlength="8"/>
+			</div>
+			<button type="submit" class="w-full p-2 border border-gray-300 rounded-md bg-black text-white">Register</button>
 		</form>
+		<div id="hotelReg"></div>
+	}
+}
+
+templ Response(isSuccess bool,message string) {
+	if isSuccess {
+		<div class="flex flex-col justify-center items-center">
+			<h1 class="text-2xl text-slate-600">Hotel Registration Successful</h1>
+			<a hx-boost="true" href="/hotel/login" class="text-blue-500">Login</a>
+		</div>
+	} else {
+		<div class="flex flex-col justify-center items-center">
+			<h1 class="text-2xl text-slate-600">{ message }</h1>
+			<a href="/hotel/register" hx-boost="true" class="text-blue-500">Try Again</a>
+		</div>
 	}
 }
