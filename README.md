@@ -18,19 +18,14 @@ build the application
 make build
 ```
 
+generate templ files
+```bash
+make templ
+```
+
 run the application
 ```bash
 make run
-```
-
-Create DB container
-```bash
-make docker-run
-```
-
-Shutdown DB container
-```bash
-make docker-down
 ```
 
 live reload the application

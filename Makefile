@@ -11,6 +11,11 @@ build:
 run:
 	@go run cmd/api/main.go
 
+# Generate templ file
+templ:
+	@echo "Generating..."
+	@templ generate
+
 # Test the application
 test:
 	@echo "Testing..."
