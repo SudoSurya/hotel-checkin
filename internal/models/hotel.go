@@ -5,10 +5,13 @@ type Hotel struct {
 	City       string `json:"city"`
 	Country    string `json:"country"`
 	State      string `json:"state"`
-	Zip        string `json:"zip"`
-	Landline   string `json:"landline"`
+	Zip        int    `json:"zip"`
+	Landline   int    `json:"landline"`
 	OwnerName  string `json:"owner_name"`
 	OwnerEmail string `json:"owner_email"`
-    CreatedAt  string `json:"created_at"`
-    UpdatedAt  string `json:"updated_at"`
+	Status     string `json:"status"`
+	ApiKey     string `json:"api_key"`
+	Password   string `json:"password"`
+	CreatedAt  string `json:"created_at"`
+	UpdatedAt  string `json:"updated_at"`
 }

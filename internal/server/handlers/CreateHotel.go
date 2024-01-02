@@ -2,12 +2,14 @@ package handlers
 
 import (
 	"fmt"
+	"hotel-checkin/cmd/web"
 	"hotel-checkin/internal/database"
 	"hotel-checkin/internal/models"
+	"hotel-checkin/internal/utils"
 	"net/http"
 )
 
-func CreateHotelForm(w http.ResponseWriter, r *http.Request) {
+func CreateHotelForm(w http.ResponseWriter, r *http.Request, s database.Service) {
 	err := r.ParseForm()
 	if err != nil {
 		// Handle error here via logging and then return
@@ -19,16 +21,26 @@ func CreateHotelForm(w http.ResponseWriter, r *http.Request) {
 		City:       r.Form.Get("city"),
 		State:      r.Form.Get("state"),
 		Country:    r.Form.Get("country"),
-		Zip:        r.Form.Get("zip"),
-		Landline:   r.Form.Get("landline"),
+		Zip:        utils.Str_int(r.Form.Get("zip")),
+		Landline:   utils.Str_int(r.Form.Get("landline")),
 		OwnerName:  r.Form.Get("owner_name"),
 		OwnerEmail: r.Form.Get("owner_email"),
+		Password:   r.Form.Get("password"),
 	}
-	fmt.Println(hotelData)
-    fmt.Println(hotelData.Zip,"zip")
-    err = database.New().InsertHotel(hotelData)
-    if err != nil {
-        fmt.Println(err)
-        http.Error(w, "Error inserting hotel", http.StatusInternalServerError)
-    }
+	isHotelExist := s.IsHotelExist(hotelData.OwnerEmail)
+	if isHotelExist {
+		component := web.Response(false, "Hotel already exist")
+		_ = component.Render(r.Context(), w)
+        http.Error(w, "", http.StatusBadRequest)
+		return
+	}
+	err = s.InsertHotel(hotelData)
+	if err != nil {
+		fmt.Println(err)
+		component := web.Response(false, "Error inserting hotel")
+		_ = component.Render(r.Context(), w)
+		return
+	}
+	component := web.Response(true, "Hotel inserted successfully")
+	_ = component.Render(r.Context(), w)
 }

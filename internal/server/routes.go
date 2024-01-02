@@ -18,6 +18,10 @@ func (s *Server) RegisterRoutes() http.Handler {
 	r.Handle("/js/*", fileServer)
 	r.Get("/", templ.Handler(web.Homepage()).ServeHTTP)
 	r.Get("/hotel/register", templ.Handler(web.HotelRegisterForm()).ServeHTTP)
-	r.Post("/hotel/register/create", handlers.CreateHotelForm)
+	r.Post("/hotel/register/create", s.createHotel)
 	return r
+}
+
+func (s *Server) createHotel(w http.ResponseWriter, r *http.Request) {
+	handlers.CreateHotelForm(w, r, s.db)
 }
