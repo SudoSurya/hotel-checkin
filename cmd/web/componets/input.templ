@@ -1,0 +1,22 @@
+package components
+
+import "hotel-checkin/internal/models"
+
+templ InputElement(props models.InputProps) {
+	<div { props.MainAttributes... }>
+		<input
+			required
+			type={ props.Type }
+			name={ props.Name }
+			placeholder={ props.PlaceHolder }
+			class="w-full p-2 border border-gray-300 rounded-md"
+			if props.IsRequired {
+				required
+			}
+			{ props.Attributes... }
+		/>
+		<span class={ "text-xs italic",props.StatsMessageColor }>
+			{ props.StatsMessage }
+		</span>
+	</div>
+}
