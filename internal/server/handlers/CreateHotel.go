@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"fmt"
-	"hotel-checkin/cmd/web"
+	"hotel-checkin/cmd/web/views"
 	"hotel-checkin/internal/database"
 	"hotel-checkin/internal/models"
 	"hotel-checkin/internal/utils"
@@ -29,18 +29,18 @@ func CreateHotelForm(w http.ResponseWriter, r *http.Request, s database.Service)
 	}
 	isHotelExist := s.IsHotelExist(hotelData.OwnerEmail)
 	if isHotelExist {
-		component := web.Response(false, "Hotel already exist")
+		component := views.Response(false, "Hotel already exist")
 		_ = component.Render(r.Context(), w)
-        http.Error(w, "", http.StatusBadRequest)
+		http.Error(w, "", http.StatusBadRequest)
 		return
 	}
 	err = s.InsertHotel(hotelData)
 	if err != nil {
 		fmt.Println(err)
-		component := web.Response(false, "Error inserting hotel")
+		component := views.Response(false, "Error inserting hotel")
 		_ = component.Render(r.Context(), w)
 		return
 	}
-	component := web.Response(true, "Hotel inserted successfully")
+	component := views.Response(true, "Hotel inserted successfully")
 	_ = component.Render(r.Context(), w)
 }
