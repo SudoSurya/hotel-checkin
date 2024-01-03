@@ -164,7 +164,7 @@ func HotelRegisterForm() templ.Component {
 				PlaceHolder: "Hotel Landine",
 				Type:        "text",
 				Attributes: map[string]any{
-					"oninput": "javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6); this.value = this.value.replace(/[^0-9]/g, '');",
+					"oninput": "javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10); this.value = this.value.replace(/[^0-9]/g, '');",
 				},
 			}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
@@ -209,7 +209,7 @@ func HotelRegisterForm() templ.Component {
 				PlaceHolder: "Owner Email",
 				Type:        "email",
 				Attributes: templ.Attributes{
-					"hx-post": "/hotel/register/validate",
+					"hx-post": "/hotel/email/validate",
 				},
 				MainAttributes: templ.Attributes{
 					"hx-target": "this",
@@ -283,7 +283,7 @@ func Response(isSuccess bool, message string) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1><a hx-boost=\"true\" href=\"/hotel/login\" class=\"text-blue-500\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1><a hx-boost=\"true\" hx-get=\"/hotel/login\" hx-push-url=\"true\" hx-trigger=\"load delay:3s\" hx-target=\"body\" class=\"text-blue-500\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -310,11 +310,11 @@ func Response(isSuccess bool, message string) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1><a hx-boost=\"true\" hx-get=\"/hotel/login\" hx-push-url=\"true\" hx-trigger=\"load delay:3s\" hx-target=\"body\" class=\"text-blue-500\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1><a hx-boost=\"true\" href=\"/hotel/register\" class=\"text-blue-500\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Var15 := `Login`
+			templ_7745c5c3_Var15 := `Try Again`
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var15)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

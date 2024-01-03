@@ -55,7 +55,7 @@ templ HotelRegisterForm() {
                     PlaceHolder: "Hotel Landine",
                     Type: "text",
                     Attributes: map[string]any{
-                        "oninput":"javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6); this.value = this.value.replace(/[^0-9]/g, '');",
+                        "oninput":"javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10); this.value = this.value.replace(/[^0-9]/g, '');",
                     },
                 })
 			</div>
@@ -77,7 +77,7 @@ templ HotelRegisterForm() {
                     PlaceHolder: "Owner Email",
                     Type: "email",
 			        Attributes: templ.Attributes{
-				        "hx-post": "/hotel/register/validate",
+				        "hx-post": "/hotel/email/validate",
 			        },
 			        MainAttributes: templ.Attributes{
 				        "hx-target": "this",
@@ -104,12 +104,12 @@ templ Response(isSuccess bool,message string) {
 	if isSuccess {
 		<div class="flex flex-col justify-center items-center">
 			<h1 class="text-2xl text-slate-600">Hotel Registration Successful</h1>
-			<a hx-boost="true" href="/hotel/login" class="text-blue-500">Login</a>
+            <a hx-boost="true" hx-get="/hotel/login" hx-push-url="true" hx-trigger="load delay:3s" hx-target="body" class="text-blue-500">Login</a>
 		</div>
 	} else {
 		<div class="flex flex-col justify-center items-center">
 			<h1 id="registration-response" class="text-2xl text-slate-600">{ message }</h1>
-			<a hx-boost="true" hx-get="/hotel/login" hx-push-url="true" hx-trigger="load delay:3s" hx-target="body" class="text-blue-500">Login</a>
+            <a hx-boost="true" href="/hotel/register" class="text-blue-500">Try Again</a>
 		</div>
 	}
 }

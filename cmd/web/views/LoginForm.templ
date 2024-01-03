@@ -1,0 +1,43 @@
+package views
+
+import "hotel-checkin/cmd/web"
+import "hotel-checkin/cmd/web/componets"
+import "hotel-checkin/internal/models"
+
+templ HotelLoginForm() {
+	@web.Base() {
+		<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                    var form = document.getElementById("hotelloginform");
+                    form.reset();
+            });
+        </script>
+		<div>
+			<form id="hotelloginform" hx-post="/hotel/login/create" METHOD="post" class="mx-auto max-w-2xl p-4 space-y-8 mt-10">
+				<h1 class="text-xl text-slate-600">Hotel Login Form</h1>
+				@components.LabelElement("owner_email", "Owner Email")
+				@components.InputElement(models.InputProps{
+                    Name: "owner_email",
+                    PlaceHolder: "Owner Email",
+                    Type: "email",
+                    IsRequired: true,
+			        Attributes: templ.Attributes{
+				        "hx-post": "/hotel/email/validate",
+			        },
+			        MainAttributes: templ.Attributes{
+				        "hx-target": "this",
+				        "hx-swap":   "outerHTML",
+			        },
+                })
+				@components.LabelElement("password", "Password")
+				@components.InputElement(models.InputProps{
+                    Name: "owner_password",
+                    PlaceHolder: "Owner Password",
+                    Type: "password",
+                    IsRequired: true,
+                })
+				<button type="submit" class="w-full p-2 border border-gray-300 rounded-md bg-black text-white">Login</button>
+			</form>
+		</div>
+	}
+}

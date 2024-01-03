@@ -1,7 +1,9 @@
-package web
+package views
+
+import "hotel-checkin/cmd/web"
 
 templ Homepage () {
-	@Base() {
+	@web.Base() {
 		<main class="flex flex-col items-center justify-center space-y-4 bg-[#ffffff]">
 			<section class="container grid gap-12 px-4 md:px-6 py-10">
 				<div
