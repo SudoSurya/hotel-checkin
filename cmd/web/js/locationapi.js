@@ -1,3 +1,6 @@
+/**
+    * @param {string} country
+**/
 async function getStates(country) {
     try {
         const response = await fetch(`https://api.countrystatecity.in/v1/countries/${country}/states`, {
@@ -32,6 +35,10 @@ async function getStates(country) {
     }
 }
 
+/**
+    * @param {string} country
+    * @param {string} state
+**/
 async function getCities(state, country) {
     try {
         const response = await fetch(`https://api.countrystatecity.in/v1/countries/${country}/states/${state}/cities`, {

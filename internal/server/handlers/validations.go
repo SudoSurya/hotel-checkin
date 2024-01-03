@@ -34,7 +34,7 @@ func validEmailElement(email, color, message string) models.InputProps {
 		PlaceHolder: "Enter email",
 		Attributes: templ.Attributes{
 			"value":   email,
-			"hx-post": "/hotel/register/validate",
+			"hx-post": "/hotel/email/validate",
 		},
 		MainAttributes: templ.Attributes{
 			"hx-target": "this",

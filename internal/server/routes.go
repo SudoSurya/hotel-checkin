@@ -19,16 +19,16 @@ func (s *Server) RegisterRoutes() http.Handler {
 
 	fileServer := http.FileServer(http.FS(web.Files))
 	r.Handle("/js/*", fileServer)
-	r.Get("/", templ.Handler(web.Homepage()).ServeHTTP)
+	r.Get("/", templ.Handler(views.Homepage()).ServeHTTP)
 	r.Get("/hotel/register", templ.Handler(views.HotelRegisterForm()).ServeHTTP)
-	r.Get("/hotel/login", templ.Handler(web.HotelLoginForm()).ServeHTTP)
+	r.Get("/hotel/login", templ.Handler(views.HotelLoginForm()).ServeHTTP)
 	r.Post("/hotel/register/create", s.createHotel)
 	r.Get("/delayed-redirect", func(w http.ResponseWriter, r *http.Request) {
 		time.Sleep(4 * time.Second) // Simulate processing or delay
 		w.Header().Set("HX-Redirect", "/hotel/login")
 		fmt.Fprintf(w, "Redirecting to login...")
 	})
-	r.Post("/hotel/register/validate", s.validateHotelEmail)
+	r.Post("/hotel/email/validate", s.validateHotelEmail)
 	return r
 }
 
