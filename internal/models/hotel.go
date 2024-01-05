@@ -15,3 +15,15 @@ type Hotel struct {
 	CreatedAt  string `json:"created_at"`
 	UpdatedAt  string `json:"updated_at"`
 }
+
+type Admin struct {
+	ID           int    `json:"id"`
+	Name         string `json:"name"`
+	Email        string `json:"email"`
+	Password     string `json:"password"`
+	Department   string `json:"department"`
+	IsAuthorized bool   `json:"isAuthorized"`
+	CreatedAt    string `json:"created_at"`
+	UpdatedAt    string `json:"updated_at"`
+	ApiKey       string `json:"api_key"`
+}

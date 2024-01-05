@@ -17,7 +17,9 @@ import (
 type Service interface {
 	Health() map[string]string
 	InsertHotel(hotel models.Hotel) error
-    IsHotelExist(email string) bool
+	IsHotelExist(email string) bool
+	IsAdmin(email, password string) (bool, error)
+	Getadminapikey(apiKey string) (models.Admin, error)
 }
 
 type ConfigDB struct {
@@ -62,6 +64,12 @@ func (s *ConfigDB) Health() map[string]string {
 }
 
 func (s *ConfigDB) IsHotelExist(email string) bool {
-    return functions.IsHotelExist(s.db, email)
+	return functions.IsHotelExist(s.db, email)
 }
 
+func (s *ConfigDB) IsAdmin(email, password string) (bool, error) {
+	return functions.IsAdmim(s.db, email, password)
+}
+func (s *ConfigDB) Getadminapikey(apiKey string) (models.Admin, error) {
+    return functions.Getadminapikey(s.db, apiKey)
+}
