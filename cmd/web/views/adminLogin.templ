@@ -1,0 +1,60 @@
+package views
+
+import "hotel-checkin/cmd/web"
+import "hotel-checkin/cmd/web/componets"
+import "hotel-checkin/internal/models"
+
+templ AdminLoginForm() {
+	@web.Base() {
+		<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                    var form = document.getElementById("adminloginform");
+                    form.reset();
+            });
+        function handleResponse(event) {
+            // Extract the HX-Location header from the HTMX response
+            var hxLocation = event.detail.xhr.getResponseHeader('HX-Location');
+
+            // If the HX-Location header is present, perform a redirection
+            if (hxLocation) {
+                window.location.href = hxLocation;
+            }
+        }
+        </script>
+		<div>
+			<form
+				id="adminloginform"
+				METHOD="post"
+				hx-post="/admin/login"
+				hx-boost="true"
+				hx-target="#error"
+				hx-target-400="#error"
+				class="mx-auto max-w-2xl p-4 space-y-8 mt-10"
+			>
+				<h1 class="text-xl text-slate-600">Hotel Login Form</h1>
+				@components.LabelElement("email", "Email")
+				@components.InputElement(models.InputProps{
+                    Name: "email",
+                    PlaceHolder: "enter admin email",
+                    Type: "email",
+                    IsRequired: true,
+                })
+				@components.LabelElement("password", "Password")
+				@components.InputElement(models.InputProps{
+                    Name: "password",
+                    PlaceHolder: "Password",
+                    Type: "password",
+                    IsRequired: true,
+                })
+				<div id="error" class="text-red-500" hx-ext="response-targets"></div>
+				<button type="submit" class="w-full p-2 border border-gray-300 rounded-md bg-black text-white">Login</button>
+			</form>
+		</div>
+	}
+}
+
+templ ErrorAdminLogin(err string) {
+	<span class="text-red-500">
+		{ err }
+	</span>
+}
