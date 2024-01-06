@@ -1,0 +1,10 @@
+package components
+
+import "hotel-checkin/internal/models"
+
+templ Atag(props models.AnchorProps) {
+	<a
+		class={ "cursor-pointer text-white ml-4" }
+		{ props.Attributes... }
+	>{ props.Name }</a>
+}

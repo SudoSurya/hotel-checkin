@@ -1,0 +1,35 @@
+package components
+
+import "hotel-checkin/internal/models"
+
+templ AdminNav() {
+	<nav class="bg-blue-500 p-4">
+		<div class="container mx-auto flex justify-between items-center">
+			<div>
+				@Atag(models.AnchorProps{
+                    Name: "Home",
+                    Attributes: map[string]any{
+                        "href": "/admin/home",
+                        "hx-boost": "true",
+                    }})
+				@Atag(models.AnchorProps{
+                    Name: "Accounts",
+                    Attributes: map[string]any{
+                        "href": "/admin/accounts",
+                        "hx-boost": "true",
+                    }})
+				@Atag(models.AnchorProps{
+                    Name: "Hotels",
+                    Attributes: map[string]any{
+                        "href": "/admin/hotels",
+                        "hx-boost": "true",
+                    }})
+			</div>
+			<button
+				hx-post="/admin/logout"
+				hx-boost="true"
+				class="bg-white text-blue-500 px-4 py-2 rounded"
+			>Logout</button>
+		</div>
+	</nav>
+}
