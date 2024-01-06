@@ -12,3 +12,8 @@ type InputProps struct {
 	StatsMessage string
     StatsMessageColor string
 }
+type AnchorProps struct {
+    Name string
+    Href string
+    Attributes templ.Attributes
+}
