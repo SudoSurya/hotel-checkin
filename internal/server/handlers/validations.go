@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	components "hotel-checkin/cmd/web/componets"
+	components "hotel-checkin/cmd/web/components"
 	"hotel-checkin/internal/database"
 	"hotel-checkin/internal/models"
 	"net/http"

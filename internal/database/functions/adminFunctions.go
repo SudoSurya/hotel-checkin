@@ -22,25 +22,25 @@ func IsAdmim(db *sql.DB, email, password string) (bool, error) {
 
 func Getadminapikey(db *sql.DB, apiKey string) (models.Admin, error) {
 	const getUser = `
-        SELECT id,email,password,api_key,created_at,updated_at,name,department,isAuthorized
-        FROM admin
-        WHERE api_key = $1
+    SELECT id,email,password,api_key,created_at,updated_at,name,department,isAuthorized
+    FROM admin
+    WHERE api_key = $1
         `
 	var admin models.Admin
 	err := db.QueryRow(getUser, apiKey).Scan(
-        &admin.ID,
-        &admin.Email,
-        &admin.Password,
-        &admin.ApiKey,
-        &admin.CreatedAt,
-        &admin.UpdatedAt,
-        &admin.Name,
-        &admin.Department,
-        &admin.IsAuthorized,
-    )
-    if err != nil {
-        return models.Admin{}, fmt.Errorf("error getting admin: %w", err)
-    }
+		&admin.ID,
+		&admin.Email,
+		&admin.Password,
+		&admin.ApiKey,
+		&admin.CreatedAt,
+		&admin.UpdatedAt,
+		&admin.Name,
+		&admin.Department,
+		&admin.IsAuthorized,
+	)
+	if err != nil {
+		return models.Admin{}, fmt.Errorf("error getting admin: %w", err)
+	}
 	return admin, nil
 }
 
