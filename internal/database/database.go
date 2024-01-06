@@ -19,7 +19,8 @@ type Service interface {
 	InsertHotel(hotel models.Hotel) error
 	IsHotelExist(email string) bool
 	IsAdmin(email, password string) (bool, error)
-	Getadminapikey(apiKey string) (models.Admin, error)
+	GetadminByapikey(apiKey string) (models.Admin, error)
+	GetAdminApiKeyByEmail(email string) (string, error)
 }
 
 type ConfigDB struct {
@@ -70,6 +71,10 @@ func (s *ConfigDB) IsHotelExist(email string) bool {
 func (s *ConfigDB) IsAdmin(email, password string) (bool, error) {
 	return functions.IsAdmim(s.db, email, password)
 }
-func (s *ConfigDB) Getadminapikey(apiKey string) (models.Admin, error) {
-    return functions.Getadminapikey(s.db, apiKey)
+func (s *ConfigDB) 	GetadminByapikey(apiKey string) (models.Admin, error) {
+	return functions.Getadminapikey(s.db, apiKey)
+}
+
+func (s *ConfigDB) GetAdminApiKeyByEmail(email string) (string, error) {
+    return functions.GetAdminApiKeyByEmail(s.db, email)
 }

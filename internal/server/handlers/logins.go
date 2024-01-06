@@ -1,8 +1,10 @@
 package handlers
 
 import (
+	components "hotel-checkin/cmd/web/componets"
 	"hotel-checkin/cmd/web/views"
 	"hotel-checkin/internal/database"
+	"hotel-checkin/internal/models"
 	"net/http"
 )
 
@@ -33,12 +35,27 @@ func AdminLogin(w http.ResponseWriter, r *http.Request, db database.Service) {
 		http.Error(w, "email or password is incorrect", http.StatusBadRequest)
 		return
 	}
+    apiKey, err := db.GetAdminApiKeyByEmail(email)
+    if err != nil {
+        errElement := views.ErrorAdminLogin(err.Error())
+        _ = errElement.Render(r.Context(), w)
+        // http.Error(w, err.Error(), http.StatusBadRequest)
+        return
+    }
 	cookie := http.Cookie{
 		Name:  "admin",
-		Value: email,
+		Value: apiKey,
 		Path:  "/",
         Secure: true,
 	}
 	http.SetCookie(w, &cookie)
 	w.Header().Set("HX-Location", "/admin/dashboard")
+}
+
+func GetAdminDashboard(w http.ResponseWriter, r *http.Request, db database.Service, admin models.Admin) {
+    err := components.AdminDashBoard(admin).Render(r.Context(), w)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
 }

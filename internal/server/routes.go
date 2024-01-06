@@ -24,19 +24,24 @@ func (s *Server) RegisterRoutes() http.Handler {
 	fileServer := http.FileServer(http.FS(web.Files))
 	r.Handle("/js/*", fileServer)
 	r.Get("/", templ.Handler(views.Homepage()).ServeHTTP)
-	r.Get("/hotel/register", templ.Handler(views.HotelRegisterForm()).ServeHTTP)
-	r.Get("/hotel/login", templ.Handler(views.HotelLoginForm()).ServeHTTP)
-	r.Post("/hotel/register/create", s.createHotel)
+	// hotel routes
+	hotelRouter := chi.NewRouter()
+	hotelRouter.Get("/register", templ.Handler(views.HotelRegisterForm()).ServeHTTP)
+	hotelRouter.Get("/login", templ.Handler(views.HotelLoginForm()).ServeHTTP)
+	hotelRouter.Post("/register/create", s.createHotel)
+	hotelRouter.Post("/email/validate", s.validateHotelEmail)
+	r.Mount("/hotel", hotelRouter)
+	// admin routes
+	adminRouter := chi.NewRouter()
+	adminRouter.With(auth.RedirectIfLoggedInMiddleware).Get("/login/form", templ.Handler(views.AdminLoginForm()).ServeHTTP)
+	adminRouter.Post("/login", s.AdminLogin)
+	adminRouter.With(auth.AdminAuthMiddleware).Get("/dashboard", s.adminMiddlewareAuth(s.getAdminDashboard))
+	r.Mount("/admin", adminRouter)
+	// utils routes
 	r.Get("/delayed-redirect", func(w http.ResponseWriter, r *http.Request) {
 		time.Sleep(4 * time.Second) // Simulate processing or delay
 		w.Header().Set("HX-Redirect", "/hotel/login")
 		fmt.Fprintf(w, "Redirecting to login...")
-	})
-	r.Post("/hotel/email/validate", s.validateHotelEmail)
-	r.With(auth.RedirectIfLoggedInMiddleware).Get("/admin/login/form", templ.Handler(views.AdminLoginForm()).ServeHTTP)
-	r.Post("/admin/login", s.AdminLogin)
-	r.With(auth.AdminAuthMiddleware).Get("/admin/dashboard", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Admin Dashboard"))
 	})
 	return r
 }
@@ -52,17 +57,23 @@ func (s *Server) AdminLogin(w http.ResponseWriter, r *http.Request) {
 	handlers.AdminLogin(w, r, s.db)
 }
 
-func (s *Server) middlewareAuth(handler adminAuthedHandler) http.HandlerFunc {
+func (s *Server) getAdminDashboard(w http.ResponseWriter, r *http.Request, admin models.Admin) {
+	handlers.GetAdminDashboard(w, r, s.db, admin)
+}
+
+func (s *Server) adminMiddlewareAuth(handler adminAuthedHandler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		apiKey, err := auth.Getadminapikey(r)
 		if err != nil {
-			w.Write([]byte("Unauthorized"))
+			fmt.Println("auth api error", err)
+			http.Error(w, "Unauthorized", http.StatusBadRequest)
 			return
 		}
-		admin, err := s.db.Getadminapikey(apiKey)
+		admin, err := s.db.GetadminByapikey(apiKey)
 		if err != nil {
-			w.Write([]byte("Unauthorized"))
+			fmt.Println("error getting admin", err)
+			http.Error(w, "Unauthorized", http.StatusBadRequest)
 			return
 		}
 
