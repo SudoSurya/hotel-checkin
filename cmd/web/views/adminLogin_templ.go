@@ -11,7 +11,7 @@ import "io"
 import "bytes"
 
 import "hotel-checkin/cmd/web"
-import "hotel-checkin/cmd/web/componets"
+import "hotel-checkin/cmd/web/components"
 import "hotel-checkin/internal/models"
 
 func AdminLoginForm() templ.Component {

@@ -1,0 +1,29 @@
+package views
+
+import "hotel-checkin/internal/models"
+import "hotel-checkin/cmd/web"
+import "hotel-checkin/cmd/web/components"
+
+script toDate(t string) {
+  document.getElementById('joinedDate').textContent = new Date(t).toDateString();
+}
+
+templ AdminDashBoard(props models.Admin) {
+	@web.Base() {
+		@components.AdminNav()
+		<div class="container mx-auto mt-8">
+			<div class="bg-white p-8 rounded-lg shadow-lg">
+				<h1 class="text-3xl font-bold text-gray-800 mb-4">Admin Dashboard</h1>
+				<p class="text-base text-gray-600 mb-2">Welcome, <span class="font-semibold">{ props.Name }</span></p>
+				<p class="text-base text-gray-600 mb-2">Email: <span class="font-semibold">{ props.Email }</span></p>
+				<p class="text-base text-gray-600 mb-2">Department: <span class="font-semibold">{ props.Department }</span></p>
+				<p class="text-base text-gray-600 mb-2">
+					Joined on:
+					<span id="joinedDate" class="font-semibold">
+						@toDate(props.CreatedAt)
+					</span>
+				</p>
+			</div>
+		</div>
+	}
+}
