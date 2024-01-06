@@ -52,11 +52,48 @@ func CreateHotel(db *sql.DB, hotel *models.Hotel) error {
 	return nil
 }
 
+func GetHotels(db *sql.DB) ([]models.Hotel, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+	defer cancel()
+
+	rows, err := db.QueryContext(ctx, "SELECT * FROM hotels where status = 'progress'")
+	if err != nil {
+		return nil, fmt.Errorf("error querying hotels: %w", err)
+	}
+	defer rows.Close()
+
+	var hotels []models.Hotel
+	for rows.Next() {
+		var hotel models.Hotel
+		err := rows.Scan(
+			&hotel.ID,
+			&hotel.Name,
+			&hotel.City,
+			&hotel.State,
+			&hotel.Country,
+			&hotel.Zip,
+			&hotel.Landline,
+			&hotel.Password,
+			&hotel.OwnerName,
+			&hotel.OwnerEmail,
+			&hotel.CreatedAt,
+			&hotel.UpdatedAt,
+			&hotel.ApiKey,
+			&hotel.Status,
+		)
+		if err != nil {
+			return nil, fmt.Errorf("error scanning hotel: %w", err)
+		}
+		hotels = append(hotels, hotel)
+	}
+	return hotels, nil
+}
+
 func IsHotelExist(db *sql.DB, email string) bool {
 	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
 	defer cancel()
 
 	var hotelID string
 	err := db.QueryRowContext(ctx, "SELECT id FROM hotels WHERE owner_email = ?", email).Scan(&hotelID)
-    return err == nil
+	return err == nil
 }

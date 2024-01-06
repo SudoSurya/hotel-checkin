@@ -1,10 +1,13 @@
 package views
 
 import "hotel-checkin/cmd/web/components"
+import "hotel-checkin/cmd/web"
 
 templ AdminHome() {
-	@components.AdminNav()
-	<div>
-		<h1>Admin Home</h1>
-	</div>
+	@web.Base() {
+		@components.AdminNav()
+		<div>
+			<h1>Admin Home</h1>
+		</div>
+	}
 }

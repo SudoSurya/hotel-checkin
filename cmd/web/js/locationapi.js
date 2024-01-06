@@ -62,7 +62,7 @@ async function getCities(state, country) {
         // Add options for each city
         data.forEach(city => {
             const option = document.createElement("option");
-            option.value = city.id; // Set the value to the city ID or relevant identifier
+            option.value = city.name; // Set the value to the city ID or relevant identifier
             option.text = city.name; // Set the text to the city name
             citiesDropdown.appendChild(option);
         });

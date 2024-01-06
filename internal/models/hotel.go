@@ -1,6 +1,7 @@
 package models
 
 type Hotel struct {
+	ID         string `json:"id"`
 	Name       string `json:"hotel_name"`
 	City       string `json:"city"`
 	Country    string `json:"country"`
@@ -17,7 +18,7 @@ type Hotel struct {
 }
 
 type Admin struct {
-	ID           int    `json:"id"`
+	ID           string `json:"id"`
 	Name         string `json:"name"`
 	Email        string `json:"email"`
 	Password     string `json:"password"`

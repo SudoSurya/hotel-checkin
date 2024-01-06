@@ -44,3 +44,15 @@ func CreateHotelForm(w http.ResponseWriter, r *http.Request, s database.Service)
 	component := views.Response(true, "Hotel inserted successfully")
 	_ = component.Render(r.Context(), w)
 }
+
+func GetHotels(w http.ResponseWriter, r *http.Request, s database.Service) {
+	hotels, err := s.GetHotels()
+	if err != nil {
+		fmt.Println(err)
+		component := views.Response(false, "Error getting hotels")
+		_ = component.Render(r.Context(), w)
+		return
+	}
+	component := views.AdminHotels(hotels)
+	_ = component.Render(r.Context(), w)
+}

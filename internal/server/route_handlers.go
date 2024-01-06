@@ -28,6 +28,9 @@ func (s *Server) getAdminDashboard(w http.ResponseWriter, r *http.Request, admin
 	handlers.GetAdminDashboard(w, r, s.db, admin)
 }
 
+func (s *Server) getHotels(w http.ResponseWriter, r *http.Request, admin models.Admin) {
+    handlers.GetHotels(w, r, s.db)
+}
 func (s *Server) adminMiddlewareAuth(handler adminAuthedHandler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 

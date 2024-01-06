@@ -1,0 +1,37 @@
+package views
+
+import "hotel-checkin/internal/models"
+import "hotel-checkin/cmd/web"
+import "hotel-checkin/cmd/web/components"
+
+templ AdminHotels(props []models.Hotel) {
+	@web.Base() {
+		@components.AdminNav()
+		<div class="flex flex-col gap-2 m-4">
+			for _,hotel := range props {
+				<div class="flex justify-between p-4 border border-gray-300 rounded shadow-md">
+					<div class="flex flex-col items-start">
+						<h1 class="text-xl font-bold mb-2">{ hotel.Name }</h1>
+						<p class="text-gray-700 text-sm mb-2">
+							{ hotel.OwnerEmail }
+						</p>
+						<p class="text-base text-gray-500">
+							{ hotel.City }, { hotel.State }, { hotel.Country }
+						</p>
+						<a href={ templ.SafeURL("/admin/hotels/" + hotel.ID) } hx-boost="true" class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition mt-2">
+							View Details
+						</a>
+					</div>
+					<div class="flex flex-col gap-2 space-y-2">
+						<button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition" type="button">
+							Accept
+						</button>
+						<button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition" type="button">
+							Reject
+						</button>
+					</div>
+				</div>
+			}
+		</div>
+	}
+}

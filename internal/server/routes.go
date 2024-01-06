@@ -5,6 +5,7 @@ import (
 	"hotel-checkin/cmd/web"
 	"hotel-checkin/cmd/web/views"
 	"hotel-checkin/internal/auth"
+	"hotel-checkin/internal/models"
 	"net/http"
 	"time"
 
@@ -13,7 +14,6 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 )
 
-
 func (s *Server) RegisterRoutes() http.Handler {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
@@ -21,6 +21,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 	fileServer := http.FileServer(http.FS(web.Files))
 	r.Handle("/js/*", fileServer)
 	r.Get("/", templ.Handler(views.Homepage()).ServeHTTP)
+
 	// hotel routes
 	hotelRouter := chi.NewRouter()
 	hotelRouter.Get("/register", templ.Handler(views.HotelRegisterForm()).ServeHTTP)
@@ -34,7 +35,12 @@ func (s *Server) RegisterRoutes() http.Handler {
 	adminRouter.Post("/login", s.AdminLogin)
 	adminRouter.With(auth.AdminAuthMiddleware).Get("/dashboard", s.adminMiddlewareAuth(s.getAdminDashboard))
 	adminRouter.Get("/home", s.adminMiddlewareAuth(s.getAdminDashboard))
-    adminRouter.Post("/logout", s.AdminLogout)
+	adminRouter.Post("/logout", s.AdminLogout)
+	adminRouter.Get("/hotels", s.adminMiddlewareAuth(s.getHotels))
+	adminRouter.Get("/hotels/{id}", s.adminMiddlewareAuth(func(w http.ResponseWriter, r *http.Request, a models.Admin) {
+        id := chi.URLParam(r, "id")
+        w.Write([]byte(fmt.Sprintf("Hotel ID: %s", id)))
+	}))
 	r.Mount("/admin", adminRouter)
 	// utils routes
 	r.Get("/delayed-redirect", func(w http.ResponseWriter, r *http.Request) {
@@ -44,4 +50,3 @@ func (s *Server) RegisterRoutes() http.Handler {
 	})
 	return r
 }
-

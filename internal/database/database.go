@@ -21,6 +21,7 @@ type Service interface {
 	IsAdmin(email, password string) (bool, error)
 	GetadminByapikey(apiKey string) (models.Admin, error)
 	GetAdminApiKeyByEmail(email string) (string, error)
+    GetHotels() ([]models.Hotel, error)
 }
 
 type ConfigDB struct {
@@ -78,3 +79,8 @@ func (s *ConfigDB) 	GetadminByapikey(apiKey string) (models.Admin, error) {
 func (s *ConfigDB) GetAdminApiKeyByEmail(email string) (string, error) {
     return functions.GetAdminApiKeyByEmail(s.db, email)
 }
+
+func (s *ConfigDB) GetHotels() ([]models.Hotel, error) {
+    return functions.GetHotels(s.db)
+}
+
